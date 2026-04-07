@@ -3,7 +3,7 @@ import subprocess
 
 from mcp.server.fastmcp import FastMCP
 
-workspace = "D:\MCP_Works\Terminal_MCP\data"
+workspace = "D:\\MCP_Works\\Terminal_MCP\\data"
 
 mcp = FastMCP("terminal_mcp")
 
