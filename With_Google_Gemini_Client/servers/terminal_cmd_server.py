@@ -28,4 +28,4 @@ async def run_commands(command:str)->str:
 
 
 if __name__=="__main__":
-    mcp.run(transport="stdio"
+    mcp.run(transport="stdio")
