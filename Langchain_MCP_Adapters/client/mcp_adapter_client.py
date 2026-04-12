@@ -1,4 +1,4 @@
-import asycnio
+import asyncio
 import os
 import sys
 import json
@@ -55,4 +55,49 @@ server_params = StdioServerParameters(
     args=[server_script]
 )
 
+mcp_client=None
 
+#Main async function run_agent
+
+async def run_agent():
+    """
+    connect to the mcp server, load mcp tools, create a react agent, and run an interactive chat loop.
+    
+    steps:
+    open a stdio connection to mcp server
+    create and initialize mcp session
+    store the session in a global holder (mcp_client) for tools access
+    load mcp tools using load_mcp_tools
+    create agent using create_agent with LLM and loaded tools
+    enter an interactive loop : for each user query, invoke the agent asynchronously using ainvoke then print
+    the response as formatted JSON using custom encoder
+    
+    """
+    global mcp_client
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write)as session:
+            await session.initialize()
+
+            mcp_client = type("MCPClientHolder", (), {"session": session})()
+
+            tools = await load_mcp_tools(session)
+
+            agent = create_agent(llm, tools)
+            print("MCP Client Started! Type 'quit' to exit")
+            while True:
+                query = input("\nQuery: ").strip()
+                if query.lower() == "quit":
+                    break
+                response = agent.ainvoke({"messages":{"role":"user", "content": query}})
+
+                try:
+                    formatted = json.dumps(response, indent=2, cls=CustomEncoder)
+                except Exception as e:
+                    formatted = str(response)
+                print("\nResponse:")
+                print(formatted)        
+
+    return 
+
+if __name__=="__main__":
+    asyncio.run(run_agent())
