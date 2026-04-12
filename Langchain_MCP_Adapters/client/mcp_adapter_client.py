@@ -46,3 +46,13 @@ llm = ChatGoogleGenerativeAI(
 
 if len(sys.argv) < 2:
     print("Uage: python mcp_adapter_client.py <path_to_server_script")
+    sys.exit(1)
+
+server_script =sys.argv[1]
+
+server_params = StdioServerParameters(
+    command="python" if server_script.endswith(".py") else "node",
+    args=[server_script]
+)
+
+
