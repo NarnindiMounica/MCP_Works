@@ -1,0 +1,7 @@
+langchain
+langchain_mcp_adapters
+langchain_google_genai
+langgraph
+google-generativeai
+python-dotenv
+mcp
