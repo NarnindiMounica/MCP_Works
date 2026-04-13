@@ -3,7 +3,7 @@ import subprocess
 
 from mcp.server.fastmcp import FastMCP
 
-working_dir = "D:\\MCP_Works\\Terminal_Server_As_Docker_Image"
+working_dir = "D:\\MCP_Works\\Terminal_Server_As_Docker_Image\\"
 mcp = FastMCP("terminal_cmd_server")
 
 @mcp.tool()
