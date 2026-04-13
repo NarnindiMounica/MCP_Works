@@ -45,10 +45,10 @@ llm = ChatGoogleGenerativeAI(
 #MCP Server Parameters
 
 if len(sys.argv) < 2:
-    print("Uage: python mcp_adapter_client.py <path_to_server_script")
+    print("Usage: python mcp_adapter_client.py <path_to_server_script>")
     sys.exit(1)
 
-server_script =sys.argv[1]
+server_script=sys.argv[1]
 
 server_params = StdioServerParameters(
     command="python" if server_script.endswith(".py") else "node",
@@ -88,7 +88,7 @@ async def run_agent():
                 query = input("\nQuery: ").strip()
                 if query.lower() == "quit":
                     break
-                response = agent.ainvoke({"messages":{"role":"user", "content": query}})
+                response = await agent.ainvoke({"messages":{"role":"user", "content": query}})
 
                 try:
                     formatted = json.dumps(response, indent=2, cls=CustomEncoder)
