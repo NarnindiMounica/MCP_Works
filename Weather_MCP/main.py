@@ -10,5 +10,5 @@ async def check_weather(location:str)->str:
     return get_weather(location)
 
 if __name__=="__main__":
-    mcp.run(transport="stdio")
+    mcp.run(transport="stdio"
         
