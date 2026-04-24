@@ -5,7 +5,7 @@ from tools.weather import get_weather
 mcp = FastMCP("Weather Checker")
 
 @mcp.tool()
-async def check_weather(location:str)->str:
+async def check_weather(location:str)->str
     """get weather information for a specified location"""
     return get_weather(location)
 
